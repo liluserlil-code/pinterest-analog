@@ -1,7 +1,11 @@
 import { ReactElement } from "react"
+import Header from "../../components/header"
 
 const PicturesFeed = ():ReactElement => {
-    return(<></>)
+    return(
+        <Header/>
+
+    )
 }
 
 export default PicturesFeed
