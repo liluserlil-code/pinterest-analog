@@ -3,7 +3,7 @@ import Header from "../../components/header"
 
 const PicturesFeed = ():ReactElement => {
     return(
-        <Header/>
+        <Header buttonPath={"/favorites"} buttonText={"Your profile"} headerText={"Pinterest"}/>
 
     )
 }
