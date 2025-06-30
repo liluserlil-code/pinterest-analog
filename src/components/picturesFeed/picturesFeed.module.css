@@ -1,0 +1,13 @@
+/* .picturesfeed{
+    margin-top: 30px;
+    width: fit-content;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+} */
+
+.grid {
+    box-sizing: border-box;
+    margin-top: 20px;
+    scrollbar-width: none;
+}

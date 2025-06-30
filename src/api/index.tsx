@@ -3,7 +3,7 @@ import { IPictureArray } from "../domains/picture"
 
 class API {
     public static async loadPicture():Promise<IPictureArray> {
-        return fetch("https://jsonplaceholder.typicode.com/photos")
+        return fetch("https://picsum.photos/v2/list")
             .then(response => response.json())
     }
 }

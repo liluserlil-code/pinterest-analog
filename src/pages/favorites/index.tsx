@@ -3,7 +3,7 @@ import Header from "../../components/header"
 
 const Favorites = ():ReactElement => {
     return(
-        <Header buttonPath={"/"} buttonText={"Home"} headerText={"Your profile"}/>
+        <Header buttonPath={"/"} buttonText={"Home"} headerText={"Favorites"}/>
     )
 }
 
