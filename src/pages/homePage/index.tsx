@@ -2,6 +2,7 @@
 // обычной переменной в качестве хранилища через useContext
 // вкладка расходовала 600+ мб памяти
 // Решение: loading="lazy" на img
+// Решение 2: библиотека 'react-window'
 
 import { ReactElement, useEffect, useState } from "react"
 import Header from "../../components/header"

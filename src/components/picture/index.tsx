@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import s from "./picture.module.css"
 import PictureMenu from "./pictureMenu";
 
@@ -8,10 +8,12 @@ type Props = {
 }
 
 const Picture = ({id, url}:Props):ReactElement => {
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
     return(
         <div className={s.picture}>
-            <img src={url} alt="picture"/>
-            <PictureMenu id={id} />
+            <img loading="lazy" src={url} alt="picture"/>
+            <PictureMenu id={id} setIsFavorite={setIsFavorite}/>
+            {isFavorite && <span className={s.isFavorite}>⭐</span>}
         </div>
     )
 }
