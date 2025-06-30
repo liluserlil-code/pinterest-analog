@@ -1,8 +1,9 @@
 import { ReactElement } from "react"
+import Header from "../../components/header"
 
 const Favorites = ():ReactElement => {
     return(
-        <h1>fgdf</h1>
+        <Header buttonPath={"/"} buttonText={"Home"} headerText={"Your profile"}/>
     )
 }
 
