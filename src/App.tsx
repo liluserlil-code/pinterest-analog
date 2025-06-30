@@ -1,8 +1,11 @@
 import AppRouter from "./router"
+import MasterProvider from "./provider/MasterProvider"
 
 function App() {
   return (
-    <AppRouter/>
+    <MasterProvider>
+      <AppRouter/>
+    </MasterProvider>
   )
 }
 
