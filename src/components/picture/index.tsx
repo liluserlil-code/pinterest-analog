@@ -11,7 +11,7 @@ const Picture = ({id, url}:Props):ReactElement => {
     return(
         <div className={s.picture}>
             <img src={url} alt="picture"/>
-            <PictureMenu />
+            <PictureMenu id={id} />
         </div>
     )
 }
