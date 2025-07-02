@@ -9,24 +9,22 @@ type Props = {
 }
 
 const PictureMenu = ({id, setIsFavorite}: Props):ReactElement => {
-    // const feedPicturesArray = useContext(feedContext)![0];
-    // const favoritePicturesArray = useContext(favoritesContext)![0]
-
-    // const setFavoritePicturesArray = useContext(favoritesContext)![1]
-    // const setFeedPicturesArray = useContext(feedContext)![1]
 
     const {feedList, setFeedList} = useContext(feedContext);
     const {favoritesList, setFavoritesList} = useContext(favoritesContext)
+    const {favoritesIds, setFavoritesIds} = useContext(favoritesContext)
 
     const onSaveClick = () => {
-        if(!favoritesList.find((item: { id: number; }) => item.id === id))(
+        if(!favoritesList.find((item: { id: number; }) => item.id === id)){
             setFavoritesList([...favoritesList, feedList[id]])
-        )
-        setIsFavorite(true);
+            setIsFavorite(true);
+            setFavoritesIds([...favoritesIds, id]);
+        }
     }
     const onDeleteClick = () => {
         setFavoritesList(favoritesList.filter((item: { id: number; }) => item.id !== id))
         setFeedList(feedList.filter((item: { id: number; }) => item.id !== id))
+        setFavoritesIds(favoritesIds.filter(item => item !== id))
     }
 
     return(
