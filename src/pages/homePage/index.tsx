@@ -4,7 +4,7 @@
 // Решение: loading="lazy" на img
 // Решение 2: библиотека 'react-window'
 
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useEffect, useRef, useState } from "react"
 import Header from "../../components/header"
 import API from "../../api";
 import { useContext } from "react";
@@ -15,15 +15,16 @@ import s from "./homePage.module.css"
 
 const HomePage = ():ReactElement => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    //const context = useContext(feedContext)![0]; // "!" - Это называется Non-Null Assertion Operator (оператор утверждения «не null / не undefined»).
+    const [page, setPage] = useState<number>(1)
     const {feedList, setFeedList} = useContext(feedContext);
+    const loaderRef = useRef<HTMLDivElement>(null)
     
     const getPicturesFeed = async () => {
         try{
             setIsLoading(true);
-            const response = await API.loadPicture();
-            setFeedList(response);
-
+            const response = await API.loadPicture(page);
+            setFeedList([...feedList, ...response]);
+            setPage(prev => prev + 1);
         }catch(error: any){
             console.log(error);
         }finally{
@@ -32,13 +33,30 @@ const HomePage = ():ReactElement => {
     }
 
     useEffect(() => {
-        getPicturesFeed();
-    }, [])
+        if (!loaderRef.current) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && !isLoading) {
+                getPicturesFeed();
+                }
+            },
+            { root: null, threshold: 0.1 }
+        );
+
+        observer.observe(loaderRef.current);
+
+        return () => observer.disconnect();
+    }, [loaderRef.current, isLoading]);
+
+
 
     return(
         <div className={s.homepage}>
             <Header buttonPath={"/favorites"} buttonText={"Favorites"} headerText={"Pinterest"}/>
-            {(isLoading ? <Loading/> : <PicturesFeed picturesArray={feedList}/>)}
+            <PicturesFeed picturesArray={feedList}/>
+            {(isLoading? <Loading/> : null)}
+            <div ref={loaderRef} style={{ height: "20px" }} />
         </div>
     )
 }

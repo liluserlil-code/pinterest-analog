@@ -12,11 +12,11 @@ const Picture = ({id, url}:Props):ReactElement => {
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
     const favoritesIds:boolean = useContext(favoritesContext).favoritesIds.includes(id)
     return(
-        <div className={s.picture}>
-            <img loading="lazy" src={url} alt="picture"/>
+        <article className={s.picture}>
+            <img src={url} alt="picture"/>
             <PictureMenu id={id} setIsFavorite={setIsFavorite}/>
             {(favoritesIds || isFavorite) && <span className={s.isFavorite}>⭐</span>}
-        </div>
+        </article>
     )
 }
 
