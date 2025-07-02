@@ -8,23 +8,21 @@ import { ReactElement, useEffect, useState } from "react"
 import Header from "../../components/header"
 import API from "../../api";
 import { useContext } from "react";
-import { feedContext } from "../../context/context"
+import { feedContext } from "../../context/homeFeedPictures/homePicturesFeedProvider"
 import PicturesFeed from "../../components/picturesFeed";
 import Loading from "./loading";
-import type { IPictureArray } from "../../domains/picture"
 import s from "./homePage.module.css"
 
 const HomePage = ():ReactElement => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     //const context = useContext(feedContext)![0]; // "!" - Это называется Non-Null Assertion Operator (оператор утверждения «не null / не undefined»).
-    const setContext = useContext(feedContext)![1];
-    const picturesArray:IPictureArray = useContext(feedContext)![0]
+    const {feedList, setFeedList} = useContext(feedContext);
     
     const getPicturesFeed = async () => {
         try{
             setIsLoading(true);
             const response = await API.loadPicture();
-            setContext(response)
+            setFeedList(response);
 
         }catch(error: any){
             console.log(error);
@@ -40,7 +38,7 @@ const HomePage = ():ReactElement => {
     return(
         <div className={s.homepage}>
             <Header buttonPath={"/favorites"} buttonText={"Favorites"} headerText={"Pinterest"}/>
-            {(isLoading ? <Loading/> : <PicturesFeed picturesArray={picturesArray}/>)}
+            {(isLoading ? <Loading/> : <PicturesFeed picturesArray={feedList}/>)}
         </div>
     )
 }

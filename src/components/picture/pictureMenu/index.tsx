@@ -1,6 +1,7 @@
 import { ReactElement, useContext } from "react";
 import s from "../picture.module.css"
-import { favoritesContext, feedContext } from "../../../context/context";
+import { favoritesContext } from "../../../context/favorites/favoritesProvider";
+import { feedContext } from "../../../context/homeFeedPictures/homePicturesFeedProvider"
 
 type Props = {
     id: number;
@@ -8,21 +9,24 @@ type Props = {
 }
 
 const PictureMenu = ({id, setIsFavorite}: Props):ReactElement => {
-    const feedPicturesArray = useContext(feedContext)![0];
-    const favoritePicturesArray = useContext(favoritesContext)![0]
+    // const feedPicturesArray = useContext(feedContext)![0];
+    // const favoritePicturesArray = useContext(favoritesContext)![0]
 
-    const setFavoritePicturesArray = useContext(favoritesContext)![1]
-    const setFeedPicturesArray = useContext(feedContext)![1]
+    // const setFavoritePicturesArray = useContext(favoritesContext)![1]
+    // const setFeedPicturesArray = useContext(feedContext)![1]
+
+    const {feedList, setFeedList} = useContext(feedContext);
+    const {favoritesList, setFavoritesList} = useContext(favoritesContext)
 
     const onSaveClick = () => {
-        if(!favoritePicturesArray.find(item => item.id === id))(
-            setFavoritePicturesArray([...favoritePicturesArray, feedPicturesArray[id]])
+        if(!favoritesList.find((item: { id: number; }) => item.id === id))(
+            setFavoritesList([...favoritesList, feedList[id]])
         )
         setIsFavorite(true);
     }
     const onDeleteClick = () => {
-        setFavoritePicturesArray(favoritePicturesArray.filter(item => item.id !== id))
-        setFeedPicturesArray(feedPicturesArray.filter(item => item.id !== id))
+        setFavoritesList(favoritesList.filter((item: { id: number; }) => item.id !== id))
+        setFeedList(feedList.filter((item: { id: number; }) => item.id !== id))
     }
 
     return(

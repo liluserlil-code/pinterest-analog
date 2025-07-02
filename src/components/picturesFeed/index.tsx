@@ -28,7 +28,7 @@ const PicturesFeed = ({picturesArray}: Props):ReactElement => {
                 const picture = picturesArray[index];
                 return (
                 <div style={style} className={s.picturesfeed}>
-                    <Picture key={picture.id} id={picture.id} url={picture.url} />
+                    <Picture key={picture.id} id={picture.id} url={picture.download_url} />
                 </div>
                 );
             }}
