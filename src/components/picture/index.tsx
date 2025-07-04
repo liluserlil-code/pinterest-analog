@@ -10,12 +10,13 @@ type Props = {
 
 const Picture = ({id, url}:Props):ReactElement => {
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
-    const favoritesIds:boolean = useContext(favoritesContext).favoritesIds.includes(id)
+    const isInFavorites: boolean = useContext(favoritesContext).favoritesList.some(item => item.id === id);
+
     return(
         <article className={s.picture}>
             <img src={url} alt="picture"/>
             <PictureMenu id={id} setIsFavorite={setIsFavorite}/>
-            {(favoritesIds || isFavorite) && <span className={s.isFavorite}>⭐</span>}
+            {( isFavorite || isInFavorites ) && <span className={s.isFavorite}>⭐</span>}
         </article>
     )
 }

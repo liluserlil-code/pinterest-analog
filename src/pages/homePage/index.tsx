@@ -15,9 +15,8 @@ import s from "./homePage.module.css"
 
 const HomePage = ():ReactElement => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [page, setPage] = useState<number>(1)
-    const {feedList, setFeedList} = useContext(feedContext);
-    const loaderRef = useRef<HTMLDivElement>(null)
+    const {feedList, setFeedList, page, setPage} = useContext(feedContext);
+    const loaderRef = useRef<HTMLDivElement >(null)
     
     const getPicturesFeed = async () => {
         try{
@@ -48,8 +47,6 @@ const HomePage = ():ReactElement => {
 
         return () => observer.disconnect();
     }, [loaderRef.current, isLoading]);
-
-
 
     return(
         <div className={s.homepage}>
