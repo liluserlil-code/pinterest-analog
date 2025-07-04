@@ -29,8 +29,8 @@ const PictureMenu = ({id, setIsFavorite, isFavorite}: Props):ReactElement => {
 
     return(
         <div className={s.buttonsMenu}>
-            <button className={s.button} id="save" onClick={onSaveClick}>Сохранить</button>
-            {isFavorite && <button className={s.button} onClick={onDeleteClick}>Удалить</button>}
+            { !useContext(favoritesContext).favoritesList.some(item => item.id === id) && <button className={s.button} id="save" onClick={onSaveClick}>Сохранить</button>}
+            {( isFavorite || useContext(favoritesContext).favoritesList.some(item => item.id === id) ) && <button className={s.button} onClick={onDeleteClick}>Удалить</button>}
         </div>
     )
 }
