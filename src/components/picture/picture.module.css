@@ -19,21 +19,23 @@
 }
 
 .buttonsMenu{
+    box-sizing: border-box;
     position: absolute;
-    width: 194px;
+    width: 192px;
     bottom: 20px;
     display: none;
     flex-direction: row;
     gap: 10px;
+    align-items: center;
 }
 
 .button{
-    width: 92px;
+    flex: 1;
     color: white;
     border: none;
     background-color: brown;
-    gap: 10px;
     border-radius: 3px;
+    text-align: center;
 }
 
 .picture:hover .buttonsMenu{

@@ -15,7 +15,7 @@ const Picture = ({id, url}:Props):ReactElement => {
     return(
         <article className={s.picture}>
             <img src={url} alt="picture"/>
-            <PictureMenu id={id} setIsFavorite={setIsFavorite}/>
+            <PictureMenu id={id} setIsFavorite={setIsFavorite} isFavorite={isFavorite}/>
             {( isFavorite || isInFavorites ) && <span className={s.isFavorite}>⭐</span>}
         </article>
     )
