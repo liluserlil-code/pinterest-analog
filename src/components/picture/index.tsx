@@ -1,7 +1,7 @@
 import { ReactElement, useContext, useState } from "react";
 import s from "./picture.module.css"
 import PictureMenu from "./pictureMenu";
-import { favoritesContext } from "../../context/favorites/favoritesProvider";
+import { userContext } from "../../context/user/userProvider";
 
 type Props = {
     id: number;
@@ -9,8 +9,8 @@ type Props = {
 }
 
 const Picture = ({id, url}:Props):ReactElement => {
+    const isInFavorites: boolean = useContext(userContext).allPins.some(item => item === id);
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
-    const isInFavorites: boolean = useContext(favoritesContext).favoritesList.some(item => item.id === id);
 
     return(
         <article className={s.picture}>

@@ -1,13 +1,10 @@
 .button{
-    position: absolute;
-    right: 10px;
-    background-color: rgb(172, 53, 53);
+    flex: 1;
     color: white;
-    height: fit-content;
-    min-height: 39px;
-    min-width: 172px;
-    width: fit-content;
     border: none;
+    background-color: brown;
     border-radius: 10px;
-    font-size: 20px;
+    text-align: center;
+    font-size: 27px;
+    padding: 5px;
 }

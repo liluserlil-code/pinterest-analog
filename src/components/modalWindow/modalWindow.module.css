@@ -1,0 +1,39 @@
+.modalBack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 30%;
+  
+}
+
+.title{
+  text-align: center;
+}
+
+.button{
+  flex: 1;
+  color: white;
+  border: none;
+  background-color: brown;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 27px;
+  padding: 5px;
+}

@@ -5,7 +5,7 @@
 // Решение 2: библиотека 'react-window'
 
 import { ReactElement, useEffect, useRef, useState } from "react"
-import Header from "../../components/header"
+import MainHeader from "../../components/headers/mainHeader/mainHeader"
 import API from "../../api";
 import { useContext } from "react";
 import { feedContext } from "../../context/homeFeedPictures/homePicturesFeedProvider"
@@ -50,10 +50,12 @@ const HomePage = ():ReactElement => {
 
     return(
         <div className={s.homepage}>
-            <Header buttonPath={"/favorites"} buttonText={"Favorites"} headerText={"Pinterest"}/>
-            <PicturesFeed picturesArray={feedList}/>
-            {(isLoading? <Loading/> : null)}
-            <div ref={loaderRef} style={{ height: "20px" }} />
+            <MainHeader/>
+            <div className={s.content}>
+                <PicturesFeed picturesArray={feedList}/>
+                {(isLoading? <Loading/> : null)}
+                <div ref={loaderRef} style={{ height: "20px" }} />
+            </div>
         </div>
     )
 }

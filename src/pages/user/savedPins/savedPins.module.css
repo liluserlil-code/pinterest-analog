@@ -1,0 +1,12 @@
+.content{
+    position: absolute;
+    top: 120px;
+    align-items: center;
+}
+
+.nav{
+    width: 660px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

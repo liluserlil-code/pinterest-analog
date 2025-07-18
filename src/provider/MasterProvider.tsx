@@ -1,6 +1,6 @@
 import { type PropsWithChildren, ReactElement } from "react";
 import HomeFeedPicturesProvider from "../context/homeFeedPictures/homePicturesFeedProvider";
-import FavoritesProvider from "../context/favorites/favoritesProvider";
+import FavoritesProvider from "../context/user/userProvider";
 
 
 const MasterProvider = ({children}:PropsWithChildren):ReactElement => {

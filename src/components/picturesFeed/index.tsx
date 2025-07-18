@@ -5,11 +5,13 @@ import s from "./picturesFeed.module.css"
 
 type Props = {
     picturesArray: IPictureArray
+    title?: string;
 }
 
-const PicturesFeed = ({picturesArray}: Props):ReactElement => {
+const PicturesFeed = ({picturesArray, title}: Props):ReactElement => {
     return(
-        <div className={s.content}>
+        <div className={s.feed}>
+            <p className={s.title}>{title}</p>
             <div className={s.picturesfeed}>
                 {picturesArray.map((picture) => (
                     <Picture key={picture.id} id={picture.id} url={picture.download_url} />

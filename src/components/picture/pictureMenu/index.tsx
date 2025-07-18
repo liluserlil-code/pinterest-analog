@@ -1,7 +1,8 @@
-import { ReactElement, useContext } from "react";
+import { ReactElement, useContext, useState } from "react";
 import s from "../picture.module.css"
-import { favoritesContext } from "../../../context/favorites/favoritesProvider";
+import { userContext } from "../../../context/user/userProvider";
 import { feedContext } from "../../../context/homeFeedPictures/homePicturesFeedProvider"
+import ModalWindow from "../../modalWindow";
 
 type Props = {
     id: number;
@@ -11,26 +12,31 @@ type Props = {
 
 const PictureMenu = ({id, setIsFavorite, isFavorite}: Props):ReactElement => {
     const {feedList, setFeedList} = useContext(feedContext);
-    const {favoritesList, setFavoritesList} = useContext(favoritesContext);
+    const {allPins, setAllPins} = useContext(userContext);
+    const {unsortedPins, setUnsortedPins} = useContext(userContext);
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const onSaveClick = () => {
-        if(!favoritesList.find((item: { id: number; }) => item.id === id)){
-            const found = feedList.find(item => item.id === id);
-            if (found) {
-                setFavoritesList([...favoritesList, found]);
-                setIsFavorite(true);
-            }
-        }
+        setIsOpen(true);
     }
     const onDeleteClick = () => {
         setFeedList(feedList.filter((item: { id: number; }) => item.id !== id));
-        setFavoritesList(favoritesList.filter((item: { id: number; }) => item.id !== id));
+        setAllPins(allPins.filter(item => item !== id));
+        setUnsortedPins(unsortedPins.filter(item => item !== id));
     }
 
     return(
         <div className={s.buttonsMenu}>
-            { !useContext(favoritesContext).favoritesList.some(item => item.id === id) && <button className={s.button} id="save" onClick={onSaveClick}>Сохранить</button>}
-            {( isFavorite || useContext(favoritesContext).favoritesList.some(item => item.id === id) ) && <button className={s.button} onClick={onDeleteClick}>Удалить</button>}
+            { !useContext(userContext).allPins.some(item => item === id) && <button className={s.button} id="save" onClick={onSaveClick}>Сохранить</button>}
+            {( isFavorite || useContext(userContext).allPins.some(item => item === id) ) && <button className={s.button} onClick={onDeleteClick}>Удалить</button>}
+            {isOpen && (
+            <ModalWindow
+                id={id}
+                setIsFavorite={setIsFavorite}
+                setIsOpen={setIsOpen}
+            />
+        )}
         </div>
     )
 }
